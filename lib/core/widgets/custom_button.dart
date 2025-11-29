@@ -75,7 +75,7 @@ class CustomButton extends StatelessWidget {
                   label ?? 'Continue'.tr,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: fontSize ?? 12,
+                    fontSize: fontSize ?? 16,
                     color: textColor ?? Colors.white,
                     fontFamily: "Montserrat",
                     fontWeight: FontWeight.bold,

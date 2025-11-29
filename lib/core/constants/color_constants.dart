@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ColorConstants {
-  static var primaryColor = const Color(0xff014BC4);
+  static var primaryColor = const Color(0xFF4E1A6F);
+  static var secandoryColor = const Color(0xffFE9600);
 
   static var whiteColor = const Color(0xffFFFFFF);
   static var grayFillColor = const Color(0xffF8F8F8);

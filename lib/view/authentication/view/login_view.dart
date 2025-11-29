@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:trading_app/core/routes/app_routes.dart';
 import 'package:trading_app/core/utils/extensions.dart';
 import 'package:trading_app/view/authentication/view/signup_view.dart';
-
+import 'package:trading_app/view/home-screens/home-screen.dart';
 
 import '../../../core/constants/assets_constants.dart';
 import '../../../core/constants/color_constants.dart';
@@ -32,35 +32,39 @@ class LoginView extends StatelessWidget {
       onTap: () => context.hideKeyboard(),
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: ColorConstants.whiteColor,
+        backgroundColor: ColorConstants.primaryColor,
         body: Padding(
-          padding: PaddingConstants.screenPaddingHalf,
+          padding: const EdgeInsets.symmetric( vertical: 137),
           child: Column(
+            //mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Widgets.heightSpaceH4,
-              // Image.asset(
-              //   Assets.logoWithNoTxt,
-              //   width: .40.,
-              // ),
-              Widgets.heightSpaceH2,
+              //Widgets.heightSpaceH05,
+              Image.asset(
+                "assets/images/logo.png",
+                width: 120,
+                height: 120,
+              ),
+              Widgets.heightSpaceH5,
               formSection(),
-              const Spacer(),
+              Widgets.heightSpaceH3,
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Texts.textNormal("Don't have an account?  ",
-                      color: Colors.black45, size: 12),
+                  Texts.textBold("Don't have an account?  ",
+                      color: Colors.white,
+                      size: 13,
+                      fontWeight: FontWeight.w900),
                   GestureDetector(
                     onTap: () {
-                      Get.to(()=>SignUpView());
+                      Get.to(() => SignUpView());
                     },
                     child: Texts.textBlock("Signup",
-                        color: ColorConstants.blackColor,
+                        color: ColorConstants.whiteColor,
                         size: 13,
                         decoration: TextDecoration.underline,
                         fontFamily: "PoppinsRegular",
-                        fontWeight: FontWeight.w400),
+                        fontWeight: FontWeight.w900),
                   ),
                 ],
               ),
@@ -73,104 +77,79 @@ class LoginView extends StatelessWidget {
   }
 
   formSection() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Texts.textBold("Welcome Again!",
-            color: ColorConstants.blackColor, size: 20),
-        Widgets.heightSpaceH3,
-        EntryField(
-          color: ColorConstants.whiteColor,
-          controller: emailController,
-          prefixIcon: Assets.emailIcon,
-          hint: "Type your email",
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Texts.textBold("Welcome Back To \n Trading App",
+              color: ColorConstants.whiteColor,
+              size: 20,
+              fontWeight: FontWeight.w600),
+          Widgets.heightSpaceH5,
 
-        ),
-        Obx(
-          () => EntryField(
-            controller: passwordController,
-            prefixIcon: Assets.lockIcon,
-            hint: "Type your password",
-            obscureText: authenticationController.obscured.value,
-            suffixIcon: authenticationController.obscured.value == false
-                ? CupertinoIcons.eye_slash
-                : Icons.remove_red_eye_outlined,
-            onTrailingTap: () {
-              authenticationController.toggleObscured();
-            },
+          EntryField(
+
+            color: ColorConstants.whiteColor,
+            controller: emailController,
+            prefixIconWidget: Icon(
+              Icons.email_outlined,
+              color: ColorConstants.iconColors, // same as eye icon color
+              size: 17,
+            ),
+            hint: "Email Address",
           ),
-        ),
-        Widgets.heightSpaceH1,
-        GestureDetector(
-          onTap: () {
-           Get.to(()=>ForgotPasswordView());
-          },
-          child: Align(
-            alignment: Alignment.topRight,
-            child: Texts.textNormal(
-              "Forgot Password?",
-              color: Colors.black54,
-              size: 12,
+
+          Obx(
+            () => EntryField(
+              controller: passwordController,
+              prefixIconWidget: Icon(
+                Icons.lock_outline_sharp,
+                color: ColorConstants.iconColors,
+                size: 17,
+              ),
+              hint: "Password",
+              obscureText: authenticationController.obscured.value,
+              suffixIcon: authenticationController.obscured.value == false
+                  ? CupertinoIcons.eye_slash
+                  : Icons.remove_red_eye_outlined,
+              onTrailingTap: () {
+                authenticationController.toggleObscured();
+              },
             ),
           ),
-        ),
-        Widgets.heightSpaceH3,
-        CustomButton(
-          label: "Login",
-          textColor: ColorConstants.whiteColor,
-          backgroundColor: ColorConstants.primaryColor,
-          radius: 10,
-          onTap: () {
-            // if (!GetUtils.isEmail(emailController.text)) {
-            //   Widgets.showSnackBar(
-            //       "Incomplete Form", "Please enter valid email");
-            // } else if (passwordController.text.length < 6) {
-            //   Widgets.showSnackBar("Incomplete Form",
-            //       "Please enter password min length 6 characters");
-            // } else {
-            //   authenticationController.loginUser(
-            //       emailController.text.toString(),
-            //       passwordController.text.toString());
-            // }
-            Get.toNamed(AppRoutes.subscriptionView);
-          },
-        ),
-        Widgets.heightSpaceH2,
-        Row(
-          children: [
-            const Expanded(
-                child: Divider(
-              color: Colors.black26,
-              thickness: .5,
-            )),
-            Padding(
-              padding: PaddingConstants.contentPadding,
-              child: Container(
-                child: Texts.textNormal("OR", color: ColorConstants.blackColor, size: 12),
+          Widgets.heightSpaceH1,
+          GestureDetector(
+            onTap: () {
+              Get.to(() => ForgotPasswordView());
+            },
+            child: Align(
+              alignment: Alignment.center,
+              child: Texts.textBlock(
+                "Forgot Password?",
+                color: Colors.white,
+                decoration: TextDecoration.underline,
+                size: 12,
+                fontWeight: FontWeight.w700,
               ),
             ),
-            const Expanded(
-                child: Divider(
-              color: Colors.black26,
-              thickness: .5,
-            )),
-          ],
-        ),
-        Widgets.heightSpaceH2,
-        CustomButton(
-          icon: Image.asset(
-            Assets.gooogleIcon,
-            height: 16,
-            width: 16,
           ),
-          label: "Login With Google",
-          textColor: ColorConstants.greyTextColor,
-          backgroundColor: ColorConstants.grayFillColor,
-          radius: 10,
-          borderColor: ColorConstants.grayBorderColor,
-          onTap: () {},
-        ),
-      ],
+          Widgets.heightSpaceH5,
+         // Widgets.heightSpaceH2,
+          //Widgets.heightSpaceH2,
+          CustomButton(
+            label: "Login",
+
+            textColor: ColorConstants.primaryColor,
+            backgroundColor: ColorConstants.secandoryColor,
+            radius: 25,
+            //borderColor: ColorConstants.grayBorderColor,
+            onTap: () {
+              Get.to(HomeScreen());
+            },
+          ),
+        ],
+      ),
     );
   }
 }

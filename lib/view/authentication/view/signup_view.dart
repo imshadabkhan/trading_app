@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:trading_app/core/constants/padding_constants.dart';
 import 'package:trading_app/core/utils/extensions.dart';
 import 'package:trading_app/core/widgets/custom_button.dart';
+import 'package:trading_app/view/authentication/view/verification_view.dart';
 
 import '../../../core/constants/assets_constants.dart';
 import '../../../core/constants/color_constants.dart';
@@ -13,12 +14,14 @@ import '../../../core/widgets/widgets.dart';
 import '../controller/authentication_controller.dart';
 
 class SignUpView extends StatelessWidget {
-  AuthenticationController authenticationController =
-      Get.put(AuthenticationController());
-  TextEditingController fullName = TextEditingController();
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
-  TextEditingController confirmPassword = TextEditingController();
+  final AuthenticationController authenticationController =
+  Get.put(AuthenticationController());
+
+  final TextEditingController fullName = TextEditingController();
+  final TextEditingController email = TextEditingController();
+  final TextEditingController password = TextEditingController();
+  final TextEditingController confirmPassword = TextEditingController();
+
   SignUpView({super.key});
 
   @override
@@ -26,45 +29,52 @@ class SignUpView extends StatelessWidget {
     return GestureDetector(
       onTap: () => context.hideKeyboard(),
       child: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          centerTitle: true,
-          title: Texts.textBold("Sign Up",
-              color: ColorConstants.blackColor,
-              size: 22,
-              textAlign: TextAlign.start),
-          elevation: 0,
-          scrolledUnderElevation: 0,
-          backgroundColor: ColorConstants.whiteColor,
-        ),
         resizeToAvoidBottomInset: false,
-        backgroundColor: ColorConstants.whiteColor,
-        body: Padding(
-          padding: PaddingConstants.screenPaddingHalf,
+        backgroundColor: ColorConstants.primaryColor,
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 160),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Widgets.heightSpaceH5,
+              /// ✅ Sign Up title ABOVE the fields
+              Texts.textMedium(
+                "Sign Up",
+                size: 28,
+                color: ColorConstants.whiteColor,
+                fontWeight: FontWeight.w600,
+              ),
+
+              Widgets.heightSpaceH3,
+
               formSection(),
-              const Spacer(),
+
+              Widgets.heightSpaceH3,
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Texts.textNormal("Already have an account?  ",
-                      color: ColorConstants.greyTextColor, size: 12),
+                  Texts.textBold(
+                    "Already have an account?  ",
+                    color: ColorConstants.whiteColor,
+                    size: 12,
+                    fontWeight: FontWeight.w700,
+                  ),
                   GestureDetector(
                     onTap: () {
                       Get.back();
                     },
-                    child: Texts.textBlock("Login",
-                        color: ColorConstants.blackColor,
-                        decoration: TextDecoration.underline,
-                        size: 13,
-                        fontFamily: "PoppinsRegular",
-                        fontWeight: FontWeight.w600),
+                    child: Texts.textBlock(
+                      "Login",
+                      color: ColorConstants.whiteColor,
+                      decoration: TextDecoration.underline,
+                      size: 13,
+                      fontFamily: "PoppinsRegular",
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ],
               ),
-              Widgets.heightSpaceH2,
             ],
           ),
         ),
@@ -72,193 +82,85 @@ class SignUpView extends StatelessWidget {
     );
   }
 
-  formSection() {
+  Widget formSection() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         EntryField(
-          controller: email,
-          prefixIcon: Assets.personIcon,
+          controller: fullName,
+          prefixIconWidget:Icon(
+              Icons.person_outline,
+            color: ColorConstants.iconColors,
+            size: 17,
+          ),
           hint: "Full Name",
         ),
         EntryField(
-          controller: fullName,
-          prefixIcon: Assets.emailIcon,
+          controller: email,
+          prefixIconWidget: Icon(
+              Icons.email_outlined,
+            color: ColorConstants.iconColors,
+            size: 17,
+          ),
           hint: "Email Address",
         ),
+
         Obx(
-          () => EntryField(
+              () => EntryField(
             controller: password,
-            prefixIcon: Assets.lockIcon,
-            hint: "password",
+            prefixIconWidget: Icon(
+                Icons.lock_outline_sharp,
+              color: ColorConstants.iconColors,
+              size: 17,
+            ),
+            hint: "Password",
             obscureText: authenticationController.obscured.value,
-            suffixIcon: authenticationController.obscured.value == false
-                ? CupertinoIcons.eye_slash
-                : Icons.remove_red_eye_outlined,
-            onTrailingTap: () {
-              authenticationController.toggleObscured();
-            },
+            suffixIcon: authenticationController.obscured.value
+                ? Icons.remove_red_eye_outlined
+                : CupertinoIcons.eye_slash,
+            onTrailingTap: authenticationController.toggleObscured,
           ),
         ),
+
         Obx(
-          () => EntryField(
+              () => EntryField(
             controller: confirmPassword,
-            prefixIcon: Assets.lockIcon,
+            prefixIconWidget: Icon(Icons.lock_outline_sharp,
+              color: ColorConstants.iconColors,
+              size: 17,
+            ),
             hint: "Confirm Password",
             obscureText: authenticationController.obscured.value,
-            suffixIcon: authenticationController.obscured.value == false
-                ? CupertinoIcons.eye_slash
-                : Icons.remove_red_eye_outlined,
-            onTrailingTap: () {
-              authenticationController.toggleObscured();
-            },
+            suffixIcon: authenticationController.obscured.value
+                ? Icons.remove_red_eye_outlined
+                : CupertinoIcons.eye_slash,
+            onTrailingTap: authenticationController.toggleObscured,
           ),
         ),
-        Widgets.heightSpaceH1,
-        Widgets.heightSpaceH2,
-        Row(
-          children: [
-            Obx(
-              () => Expanded(
-                child: CustomButton(
-                  icon: Image.asset(
-                    Assets.guitarIcon,
-                    height: 20,
-                    color: authenticationController.isHostSelected.value
-                        ? Colors.black45
-                        : ColorConstants.redColor,
-                  ),
-                  label: "Musician",
-                  textColor: authenticationController.isHostSelected.value
-                      ? Colors.black45
-                      : ColorConstants.redColor,
-                  radius: 10,
-                  fontSize: 10,
-                  backgroundColor: authenticationController.isHostSelected.value
-                      ? Colors.transparent
-                      : ColorConstants.redColorOpacity,
-                  borderColor: authenticationController.isHostSelected.value
-                      ? Colors.black45
-                      : ColorConstants.redColor,
-                  onTap: () {
-                    authenticationController.toggleButton();
-                  },
-                ),
-              ),
-            ),
-            Widgets.widthSpaceW2,
-            Obx(
-              () => Expanded(
-                child: CustomButton(
-                  icon: Image.asset(
-                    Assets.clientIcon,
-                    height: 20,
-                    color: !authenticationController.isHostSelected.value
-                        ? Colors.black45
-                        : ColorConstants.redColor,
-                  ),
-                  label: "Client",
-                  textColor: !authenticationController.isHostSelected.value
-                      ? Colors.black45
-                      : ColorConstants.redColor,
-                  radius: 10,
-                  fontSize: 10,
-                  backgroundColor:
-                      !authenticationController.isHostSelected.value
-                          ? Colors.transparent
-                          : ColorConstants.redColorOpacity,
-                  borderColor: !authenticationController.isHostSelected.value
-                      ? Colors.black45
-                      : ColorConstants.redColor,
-                  onTap: () {
-                    authenticationController.toggleButton();
-                  },
-                ),
-              ),
-            ),
-          ],
-        ),
-        Widgets.heightSpaceH3,
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Obx(
-              () => SizedBox(
-                height: 20,
-                width: 20,
-                child: Checkbox(
-                  fillColor:
-                      WidgetStatePropertyAll(ColorConstants.redColorOpacity),
-                  activeColor: ColorConstants.grayBorderColor,
-                  checkColor: ColorConstants.redColor,
-                  overlayColor: WidgetStatePropertyAll(Colors.red),
-                  side: BorderSide(
-                      color: ColorConstants.grayBorderColor, width: 2),
-                  value: authenticationController.checkboxValue.value,
-                  onChanged: (value) {
-                    authenticationController.toggleCheckBox();
-                  },
-                ),
-              ),
-            ),
-            Widgets.widthSpaceW2,
-            Texts.textNormal("Agree to terms & conditions",
-                size: 12, color: ColorConstants.greyTextColor)
-          ],
-        ),
-        Widgets.heightSpaceH3,
+
+        Widgets.heightSpaceH4,
+
         CustomButton(
           label: "Register",
-          textColor: ColorConstants.whiteColor,
-          backgroundColor: ColorConstants.primaryColor,
-          radius: 10,
+          fontSize: 16,
+          textColor: ColorConstants.primaryColor,
+          backgroundColor: ColorConstants.secandoryColor,
+          radius: 25,
           onTap: () {
+            // Call signup first
             authenticationController.signupUser(data: {
               "name": fullName.text,
               "email": email.text,
-              "role":
-                  authenticationController.isHostSelected.value == true ? 2 : 1,
+              "role": authenticationController.isHostSelected.value ? 2 : 1,
               "password": password.text,
               "password_confirmation": password.text,
             });
+
+            // Navigate to VerificationView
+            Get.to(() => VerificationView());
           },
         ),
-        Widgets.heightSpaceH2,
-        Row(
-          children: [
-            const Expanded(
-                child: Divider(
-              color: Colors.black26,
-              thickness: .5,
-            )),
-            Padding(
-              padding: PaddingConstants.contentPadding,
-              child: Container(
-                child: Texts.textNormal("OR", color: Colors.black, size: 12),
-              ),
-            ),
-            const Expanded(
-              child: Divider(
-                color: Colors.black26,
-                thickness: .5,
-              ),
-            ),
-          ],
-        ),
-        Widgets.heightSpaceH2,
-        CustomButton(
-          icon: Image.asset(
-            Assets.gooogleIcon,
-            height: 16,
-            width: 16,
-          ),
-          label: "Continue With Google",
-          textColor: ColorConstants.greyTextColor,
-          backgroundColor: ColorConstants.grayFillColor,
-          radius: 10,
-          borderColor: ColorConstants.grayBorderColor,
-          onTap: () {},
-        ),
+
       ],
     );
   }
