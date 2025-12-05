@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
+import 'package:get/get.dart';
+import 'package:trading_app/core/constants/assets_constants.dart';
+import 'package:trading_app/core/constants/color_constants.dart';
+import 'package:trading_app/core/widgets/text_widgets.dart';
 
 class AppBottomNav extends StatelessWidget {
   final int currentIndex;
@@ -13,6 +17,9 @@ class AppBottomNav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = Get.width;
+    final height = Get.height;
+
     return Theme(
       data: Theme.of(context).copyWith(
         splashColor: Colors.transparent,
@@ -20,92 +27,54 @@ class AppBottomNav extends StatelessWidget {
         hoverColor: Colors.transparent,
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+        padding: EdgeInsets.symmetric(
+          horizontal: width * 0.025,
+          vertical: height * 0.01,
+        ),
         child: CustomNavigationBar(
           currentIndex: currentIndex,
           onTap: onTap,
-          iconSize: 33,
-
-          borderRadius: const Radius.circular(25),
-          backgroundColor: const Color(0xff4E1A6F),
+          iconSize: width * 0.08,
+          borderRadius: Radius.circular(width * 0.06),
+          backgroundColor: ColorConstants.primaryColor,
           elevation: 10,
-
-          selectedColor: Colors.orange,
-          unSelectedColor: Colors.white,
-
+          selectedColor: ColorConstants.secandoryColor,
+          unSelectedColor: ColorConstants.whiteColor,
           items: [
-            CustomNavigationBarItem(
-              icon: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset("assets/images/home (2).png",
-                      height: 18, color: currentIndex == 0 ? Colors.orange : Colors.white),
-                  const SizedBox(height: 4),
-                  Text("Home",
-                      style: TextStyle(
-                          color: currentIndex == 0 ? Colors.orange : Colors.white,
-                          fontSize: 8)),
-                ],
-              ),
-            ),
-
-            CustomNavigationBarItem(
-              icon: Column(
-                children: [
-                  Image.asset("assets/images/Signals (1).png",
-                      height: 18, color: currentIndex == 1 ? Colors.orange : Colors.white),
-                  const SizedBox(height: 4),
-                  Text("Signals",
-                      style: TextStyle(
-                          color: currentIndex == 1 ? Colors.orange : Colors.white,
-                          fontSize: 8)),
-                ],
-              ),
-            ),
-
-            CustomNavigationBarItem(
-              icon: Column(
-                children: [
-                  Image.asset("assets/images/package.png",
-                      height: 18, color: currentIndex == 2 ? Colors.orange : Colors.white),
-                  const SizedBox(height: 4),
-                  Text("Package",
-                      style: TextStyle(
-                          color: currentIndex == 2 ? Colors.orange : Colors.white,
-                          fontSize: 8)),
-                ],
-              ),
-            ),
-
-            CustomNavigationBarItem(
-              icon: Column(
-                children: [
-                  Image.asset("assets/images/news.png",
-                      height: 18, color: currentIndex == 3 ? Colors.orange : Colors.white),
-                  const SizedBox(height: 4),
-                  Text("Result",
-                      style: TextStyle(
-                          color: currentIndex == 3 ? Colors.orange : Colors.white,
-                          fontSize: 8)),
-                ],
-              ),
-            ),
-
-            CustomNavigationBarItem(
-              icon: Column(
-                children: [
-                  Image.asset("assets/images/wallet.png",
-                      height: 18, color: currentIndex == 4 ? Colors.orange : Colors.white),
-                  const SizedBox(height: 4),
-                  Text("Tutorial",
-                      style: TextStyle(
-                          color: currentIndex == 4 ? Colors.orange : Colors.white,
-                          fontSize: 8)),
-                ],
-              ),
-            ),
+            buildNavItem(context, Assets.home2, "Home", 0, width, height),
+            buildNavItem(context, Assets.signals1, "Signals", 1, width, height),
+            buildNavItem(context, Assets.package, "Package", 2, width, height),
+            buildNavItem(context, Assets.news, "Result", 3, width, height),
+            buildNavItem(context, Assets.wallet, "Tutorial", 4, width, height),
           ],
         ),
+      ),
+    );
+  }
+
+  CustomNavigationBarItem buildNavItem(BuildContext context, String asset,
+      String label, int index, double width, double height) {
+    final bool isSelected = currentIndex == index;
+    return CustomNavigationBarItem(
+      icon: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            asset,
+            height: height * 0.025,
+            color: isSelected
+                ? ColorConstants.secandoryColor
+                : ColorConstants.whiteColor,
+          ),
+          SizedBox(height: height * 0.001),
+          Texts.textNormal(
+            label,
+            color: isSelected
+                ? ColorConstants.secandoryColor
+                : ColorConstants.whiteColor,
+            size: width * 0.014,
+          ),
+        ],
       ),
     );
   }

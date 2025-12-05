@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:trading_app/core/constants/color_constants.dart';
 
 // Color constants (replace with your own if needed)
-class ColorConstants {
-  static const Color primaryColor = Colors.blue;
-  static const Color secondaryColor = Colors.blueAccent;
+class ColorConstantsTwo {
+  static const Color blue = Colors.blue;
+  static const Color blueAccent = Colors.blueAccent;
 }
 
 // Controller for tab selection
@@ -18,15 +19,15 @@ class TabControllerX extends GetxController {
 
 // ForexCryptoTab Widget
 class ForexCryptoTab extends StatefulWidget {
-  final Color primaryColor;
-  final Color secondaryColor;
+  final Color blue;
+  final Color bluAccent;
   final Widget forexContent;
   final Widget cryptoContent;
 
   const ForexCryptoTab({
     super.key,
-    required this.primaryColor,
-    required this.secondaryColor,
+    required this.blue,
+    required this.bluAccent,
     required this.forexContent,
     required this.cryptoContent,
   });
@@ -70,25 +71,27 @@ class _ForexCryptoTabState extends State<ForexCryptoTab> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Obx(
-                      () => GestureDetector(
+                  () => GestureDetector(
                     onTap: () => controller.changeTab(0),
                     child: Container(
                       height: 40,
                       width: 100,
                       decoration: BoxDecoration(
                         color: controller.selectedTab.value == 0
-                            ? widget.secondaryColor
-                            : Colors.white,
+                            ? widget.bluAccent
+                            : ColorConstants.whiteColor,
                         borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: Colors.grey.shade300),
+                        border: Border.all(
+                            color:
+                                ColorConstants.grayFillColor.withOpacity(.6)),
                       ),
                       child: Center(
                         child: Text(
                           "Forex",
                           style: TextStyle(
                             color: controller.selectedTab.value == 0
-                                ? Colors.white
-                                : widget.primaryColor,
+                                ? ColorConstants.whiteColor
+                                : widget.blue,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -98,25 +101,27 @@ class _ForexCryptoTabState extends State<ForexCryptoTab> {
                 ),
                 const SizedBox(width: 10),
                 Obx(
-                      () => GestureDetector(
+                  () => GestureDetector(
                     onTap: () => controller.changeTab(1),
                     child: Container(
                       height: 40,
                       width: 100,
                       decoration: BoxDecoration(
                         color: controller.selectedTab.value == 1
-                            ? widget.secondaryColor
-                            : Colors.white,
+                            ? widget.bluAccent
+                            : ColorConstants.whiteColor,
                         borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: Colors.grey.shade300),
+                        border: Border.all(
+                            color:
+                                ColorConstants.grayFillColor.withOpacity(.6)),
                       ),
                       child: Center(
                         child: Text(
                           "Crypto",
                           style: TextStyle(
                             color: controller.selectedTab.value == 1
-                                ? Colors.white
-                                : widget.primaryColor,
+                                ? ColorConstants.whiteColor
+                                : widget.blue,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -142,18 +147,18 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Forex & Crypto"),
-        backgroundColor: ColorConstants.primaryColor,
+        backgroundColor: ColorConstantsTwo.blue,
         elevation: 0,
       ),
       body: ForexCryptoTab(
-        primaryColor: ColorConstants.primaryColor,
-        secondaryColor: ColorConstants.secondaryColor,
+        blue: ColorConstantsTwo.blue,
+        bluAccent: ColorConstantsTwo.blueAccent,
         forexContent: Container(
-          color: Colors.green.shade100,
+          color: ColorConstants.grayFillColor.withOpacity(.2),
           child: const Center(child: Text("Forex Content Here")),
         ),
         cryptoContent: Container(
-          color: Colors.purple.shade100,
+          color: ColorConstantsTwo.blue.withOpacity(.2),
           child: const Center(child: Text("Crypto Content Here")),
         ),
       ),

@@ -68,17 +68,16 @@ class EntryField extends StatelessWidget {
       children: [
         label != null
             ? Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Row(
+                padding: const EdgeInsets.only(left: 20),
+                child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Texts.textBlock(
-                      fontWeight: FontWeight.w600,
-                      label ?? "",
-                      size: 12,
-                      color: labelColor
-                    ),
+                        fontWeight: FontWeight.w600,
+                        label ?? "",
+                        size: 12,
+                        color: labelColor),
                     if (trailingTitle != null)
                       GestureDetector(
                         onTap: onTrailingTap,
@@ -87,18 +86,19 @@ class EntryField extends StatelessWidget {
                           style: Theme.of(context)
                               .textTheme
                               .titleSmall!
-                              .copyWith(fontSize: 20, color: Colors.black),
+                              .copyWith(
+                                  fontSize: 20,
+                                  color: ColorConstants.blackColor),
                         ),
                       )
                   ],
                 ),
-            )
+              )
             : const SizedBox.shrink(),
         const SizedBox(height: 5),
         Container(
           alignment: Alignment.center,
           height: 45,
-
           child: TextFormField(
             onTap: onTap,
             obscureText: obscureText ?? false,
@@ -115,11 +115,11 @@ class EntryField extends StatelessWidget {
                 ? MaxLengthEnforcement.enforced
                 : MaxLengthEnforcement.none,
             textAlign: textAlign ?? TextAlign.left,
-            style: const TextStyle(
+            style: TextStyle(
                 fontFamily: "PoppinsRegular",
                 fontWeight: FontWeight.w400,
                 fontSize: 12,
-                color: Colors.black),
+                color: ColorConstants.blackColor),
             keyboardType: textInputType,
             decoration: InputDecoration(
               filled: true,
@@ -132,9 +132,7 @@ class EntryField extends StatelessWidget {
                   ? Padding(
                       padding: const EdgeInsets.all(14.0),
                       child: SizedBox(
-                          width: 17,
-                          height: 17,
-                          child: prefixIconWidget),
+                          width: 17, height: 17, child: prefixIconWidget),
                     )
                   : prefixIcon != null
                       ? Padding(
@@ -166,20 +164,17 @@ class EntryField extends StatelessWidget {
               counterText: "",
               fillColor: fillColor ?? ColorConstants.grayFillColor,
               border: OutlineInputBorder(
-                borderSide: BorderSide(
-                    color: ColorConstants.greyTextColor),
+                borderSide: BorderSide(color: ColorConstants.greyTextColor),
                 borderRadius:
                     borderRadius ?? const BorderRadius.all(Radius.circular(10)),
               ),
               focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                    color: ColorConstants.grayBorderColor),
+                borderSide: BorderSide(color: ColorConstants.grayBorderColor),
                 borderRadius:
                     borderRadius ?? const BorderRadius.all(Radius.circular(25)),
               ),
               enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                    color: ColorConstants.grayBorderColor),
+                borderSide: BorderSide(color: ColorConstants.grayBorderColor),
                 borderRadius:
                     borderRadius ?? const BorderRadius.all(Radius.circular(25)),
               ),

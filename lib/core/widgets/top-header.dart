@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:trading_app/core/widgets/forex-crypto-tab.dart';
+import 'package:trading_app/core/constants/assets_constants.dart';
+import 'package:trading_app/core/constants/color_constants.dart';
+import 'package:trading_app/core/widgets/text_widgets.dart';
 
 class CustomTopHeader extends StatelessWidget {
   final String announcementText;
@@ -22,18 +24,25 @@ class CustomTopHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = Get.width;
+    final height = Get.height;
+
     return SizedBox(
-      height: 250,
+      height: height * 0.45, // responsive height
       child: Stack(
         clipBehavior: Clip.none,
         children: [
           // Main purple header box
           Container(
             width: double.infinity,
-            height: 240,
-            padding: const EdgeInsets.only(top: 40, left: 20, right: 20, bottom: 10),
-            decoration: const BoxDecoration(
-              color: Color(0xff4E1A6F),
+            height: height * 0.33, // responsive
+            padding: EdgeInsets.only(
+              top: height * 0.06,
+              left: width * 0.05,
+              right: width * 0.05,
+            ),
+            decoration: BoxDecoration(
+              color: ColorConstants.primaryColor,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,58 +51,56 @@ class CustomTopHeader extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Icon(Icons.menu, color: Colors.white, size: 28),
+                    Icon(Icons.menu,
+                        color: ColorConstants.whiteColor, size: width * 0.07),
                     Row(
                       children: [
-                        const Icon(Icons.notifications, color: Colors.white, size: 28),
-                        const SizedBox(width: 10),
+                        Icon(Icons.notifications,
+                            color: ColorConstants.whiteColor,
+                            size: width * 0.07),
+                        SizedBox(width: width * 0.025),
                         Container(
-                          padding: const EdgeInsets.all(2),
+                          padding: EdgeInsets.all(width * 0.005),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(
-                              color: Colors.white70,
-                              width: 2,
+                              color: ColorConstants.whiteColor.withOpacity(.7),
+                              width: width * 0.005,
                             ),
                           ),
-                          child: const CircleAvatar(
-                            radius: 18,
-                            backgroundImage: AssetImage(
-                              'assets/images/images (5).jpg',
-                            ),
+                          child: CircleAvatar(
+                            radius: width * 0.045,
+                            backgroundImage: AssetImage(Assets.images5),
                           ),
                         ),
                       ],
                     ),
                   ],
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: height * 0.015),
 
                 // Announcement
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 19),
+                  padding: EdgeInsets.symmetric(horizontal: width * 0.045),
                   child: Material(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
+                    color: ColorConstants.whiteColor,
+                    borderRadius: BorderRadius.circular(width * 0.03),
                     elevation: 4,
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: width * 0.04, vertical: height * 0.015),
                       child: Column(
                         children: [
-                          Text(
-                            "Announcement",
-                            style: TextStyle(
-                              color: Get.theme.primaryColor,
+                          Texts.textBold("Announcement",
+                              size: width * 0.04,
                               fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            announcementText,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(color: Colors.grey),
-                          ),
+                              color: ColorConstants.primaryColor),
+                          SizedBox(height: height * 0.01),
+                          Texts.textBold(announcementText,
+                              textAlign: TextAlign.center,
+                              size: width * 0.035,
+                              fontWeight: FontWeight.bold,
+                              color: ColorConstants.blackColor.withOpacity(.7)),
                         ],
                       ),
                     ),
@@ -107,7 +114,7 @@ class CustomTopHeader extends StatelessWidget {
           Positioned(
             left: 0,
             right: 0,
-            top: 217,
+            top: height * 0.30,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -115,40 +122,56 @@ class CustomTopHeader extends StatelessWidget {
                 GestureDetector(
                   onTap: onForexTap,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: width * 0.08, vertical: height * 0.015),
                     decoration: BoxDecoration(
-                      color: isForex ? Colors.orange : Colors.white,
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: Text(
+                        color: isForex
+                            ? ColorConstants.secandoryColor
+                            : ColorConstants.whiteColor,
+                        borderRadius: BorderRadius.circular(width * 0.04),
+                        boxShadow: [
+                          BoxShadow(
+                              color: ColorConstants.blackColor.withOpacity(.5),
+                              blurRadius: 4,
+                              offset: Offset(0, 1))
+                        ]),
+                    child: Texts.textBold(
                       "Forex",
-                      style: TextStyle(
-                        color: isForex ? Colors.white : Color(0xFF4E1A6F),
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      size: width * 0.045,
+                      fontWeight: FontWeight.bold,
+                      color: isForex
+                          ? ColorConstants.whiteColor
+                          : ColorConstants.primaryColor,
                     ),
                   ),
                 ),
 
-                const SizedBox(width: 10),
+                SizedBox(width: width * 0.025),
 
                 // Crypto Button
                 GestureDetector(
                   onTap: onCryptoTap,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: width * 0.08, vertical: height * 0.015),
                     decoration: BoxDecoration(
-                      color: isForex ? Colors.white : Colors.orange,
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: Text(
+                        color: isForex
+                            ? ColorConstants.whiteColor
+                            : ColorConstants.secandoryColor,
+                        borderRadius: BorderRadius.circular(width * 0.04),
+                        boxShadow: [
+                          BoxShadow(
+                              color: ColorConstants.blackColor.withOpacity(.5),
+                              blurRadius: 4,
+                              offset: Offset(0, 1))
+                        ]),
+                    child: Texts.textBold(
                       "Crypto",
-                      style: TextStyle(
-                        color: isForex ? Color(0xFF4E1A6F) : Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      size: width * 0.045,
+                      fontWeight: FontWeight.bold,
+                      color: isForex
+                          ? ColorConstants.primaryColor
+                          : ColorConstants.whiteColor,
                     ),
                   ),
                 ),
@@ -156,11 +179,10 @@ class CustomTopHeader extends StatelessWidget {
             ),
           ),
 
-
           Positioned(
-            left: 18,
-            right: 18,
-            top: 270,
+            left: width * 0.045,
+            right: width * 0.045,
+            top: height * 0.37,
             child: isForex ? forexUI : cryptoUI,
           ),
         ],
@@ -168,4 +190,3 @@ class CustomTopHeader extends StatelessWidget {
     );
   }
 }
-

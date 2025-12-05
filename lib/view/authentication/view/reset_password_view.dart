@@ -3,14 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:trading_app/core/utils/extensions.dart';
 import 'package:trading_app/core/widgets/custom_button.dart';
-import 'package:trading_app/view/home-screens/home-screen.dart';
-
-
-import '../../../core/constants/assets_constants.dart';
+import 'package:trading_app/view/authentication/view/login_view.dart';
 import '../../../core/constants/color_constants.dart';
-import '../../../core/constants/padding_constants.dart';
 import '../../../core/widgets/entry_field.dart';
-
 import '../../../core/widgets/text_widgets.dart';
 import '../../../core/widgets/widgets.dart';
 import '../controller/authentication_controller.dart';
@@ -25,96 +20,127 @@ class ResetPasswordView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Responsive screen dimensions
+    final screenWidth = Get.width;
+    final screenHeight = Get.height;
+
     return GestureDetector(
       onTap: () => context.hideKeyboard(),
       child: GetBuilder(
-          init: authenticationController,
-          builder: (_) {
-            return Scaffold(
-              resizeToAvoidBottomInset: false,
+        init: authenticationController,
+        builder: (_) {
+          return Scaffold(
+            resizeToAvoidBottomInset: false,
+            backgroundColor: ColorConstants.primaryColor,
+            appBar: AppBar(
+              centerTitle: true,
+              leading: IconButton(
+                icon: Icon(
+                  Icons.chevron_left,
+                  color: ColorConstants.whiteColor,
+                  size: screenWidth * 0.07,
+                ),
+                onPressed: () => Get.back(),
+              ),
+              elevation: 0,
+              scrolledUnderElevation: 0,
               backgroundColor: ColorConstants.primaryColor,
-              appBar: AppBar(
-                leading: Icon(Icons.chevron_left, color: Colors.white,),
-                elevation: 0,scrolledUnderElevation: 0,backgroundColor: ColorConstants.primaryColor,
-                title:   Texts.textBold(
+              title: Texts.textBold(
                 "Create New Password",
-                color: ColorConstants.whiteColor,textAlign: TextAlign.center,
-                size: 22,
-                fontWeight: FontWeight.w600),),
-
-              body: SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Widgets.heightSpaceH5,
-                      Texts.textNormal(
-                          "Please create your new password",
-                          color: ColorConstants.whiteColor,textAlign: TextAlign.center,
-                          size: 14,
-                        fontWeight: FontWeight.w400
+                color: ColorConstants.whiteColor,
+                textAlign: TextAlign.center,
+                size: screenWidth * 0.058,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            body: SafeArea(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.075),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                        height: screenHeight * 0.04), // Widgets.heightSpaceH5
+                    Texts.textNormal(
+                      "Please create your new password",
+                      color: ColorConstants.whiteColor,
+                      textAlign: TextAlign.center,
+                      size: screenWidth * 0.037,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    SizedBox(
+                        height: screenHeight * 0.04), // Widgets.heightSpaceH5
+                    EntryField(
+                      label: "Password",
+                      labelColor: ColorConstants.whiteColor,
+                      controller: passwordController,
+                      hint: "Type your new password",
+                      prefixIconWidget: Icon(
+                        Icons.lock_outline_sharp,
+                        color: ColorConstants.iconColors,
+                        size: screenWidth * 0.045,
                       ),
-                      Widgets.heightSpaceH5,
-                      EntryField(
-                        label: "Password",
-                        labelColor: Colors.white,
-                        controller: passwordController,
-                        hint: "Type your new password",
-                         prefixIconWidget: Icon(Icons.lock_outline_sharp,color: ColorConstants.iconColors,
-                         size: 19,),
-                        obscureText: authenticationController.obscured.value,
-                        suffixIcon:
-                            authenticationController.obscured.value == false
-                                ? CupertinoIcons.eye_slash
-                                : Icons.remove_red_eye_outlined,
-                        onTrailingTap: () {
-                          authenticationController.toggleObscured();
-                        },
+                      obscureText: authenticationController.obscured.value,
+                      suffixIcon:
+                          authenticationController.obscured.value == false
+                              ? CupertinoIcons.eye_slash
+                              : Icons.remove_red_eye_outlined,
+                      onTrailingTap: () {
+                        authenticationController.toggleObscured();
+                      },
+                    ),
+                    EntryField(
+                      label: 'Confirm Password',
+                      labelColor: ColorConstants.whiteColor,
+                      controller: confirmPasswordController,
+                      hint: "Type your confirm password",
+                      prefixIconWidget: Icon(
+                        Icons.lock_outline_sharp,
+                        color: ColorConstants.iconColors,
+                        size: screenWidth * 0.045,
                       ),
-                      EntryField(
-                        label: 'Confirm Password',
-                        labelColor: Colors.white,
-                        controller: confirmPasswordController,
-                        hint: "Type your confirm password",
-                         prefixIconWidget:Icon(Icons.lock_outline_sharp,color: ColorConstants.iconColors,
-                         size: 19,),
-                        obscureText: authenticationController.obscured.value,
-                        suffixIcon:
-                            authenticationController.obscured.value == false
-                                ? CupertinoIcons.eye_slash
-                                : Icons.remove_red_eye_outlined,
-                        onTrailingTap: () {
-                          authenticationController.toggleObscured();
-                        },
-                      ),
-                      Widgets.heightSpaceH1,
-                      CustomButton(
-                        backgroundColor: ColorConstants.secandoryColor,
-                        radius: 25,
-                        textColor: ColorConstants.whiteColor,
-                        label: "Change",
-                        onTap: () {
-                          Get.to(HomeScreen());
-                          if (passwordController.text.length < 6) {
-                            Widgets.showSnackBar("Incomplete Form",
-                                "Please enter password min length 6 characters");
-                          } else if (passwordController.text !=
-                              confirmPasswordController.text) {
-                            Widgets.showSnackBar("Incomplete Form",
-                                "Passwords are not matching");
-                          } else {
-                            authenticationController
-                                .resetForgotPassword(passwordController.text);
-                          }
-                        },
-                      ),
-                    ],
-                  ),
+                      obscureText: authenticationController.obscured.value,
+                      suffixIcon:
+                          authenticationController.obscured.value == false
+                              ? CupertinoIcons.eye_slash
+                              : Icons.remove_red_eye_outlined,
+                      onTrailingTap: () {
+                        authenticationController.toggleObscured();
+                      },
+                    ),
+                    SizedBox(
+                        height: screenHeight * 0.015), // Widgets.heightSpaceH1
+                    CustomButton(
+                      backgroundColor: ColorConstants.secandoryColor,
+                      radius: screenWidth * 0.065,
+                      textColor: ColorConstants.whiteColor,
+                      label: "Change",
+                      onTap: () {
+                        Get.to(LoginView());
+                        if (passwordController.text.length < 6) {
+                          Widgets.showSnackBar(
+                            "Incomplete Form",
+                            "Please enter password min length 6 characters",
+                          );
+                        } else if (passwordController.text !=
+                            confirmPasswordController.text) {
+                          Widgets.showSnackBar(
+                            "Incomplete Form",
+                            "Passwords are not matching",
+                          );
+                        } else {
+                          authenticationController
+                              .resetForgotPassword(passwordController.text);
+                        }
+                      },
+                    ),
+                  ],
                 ),
               ),
-            );
-          }),
+            ),
+          );
+        },
+      ),
     );
   }
 }

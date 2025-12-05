@@ -1,216 +1,207 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:trading_app/core/constants/color_constants.dart';
+import 'package:trading_app/core/widgets/text_widgets.dart';
+import 'package:trading_app/core/widgets/widgets.dart';
 
 class PreviousResult extends StatelessWidget {
   const PreviousResult({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final w = Get.width;
+    final h = Get.height;
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 00),
+      padding: EdgeInsets.symmetric(
+        horizontal: w * 0.04,
+        vertical: h * 0.00,
+      ),
       child: Column(
         children: [
+          Widgets.heightSpaceH5,
+
           // ---------- HEADER ROW ----------
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                height: 35,
-                padding: const EdgeInsets.symmetric(horizontal: 18),
+                height: h * 0.045,
+                padding: EdgeInsets.symmetric(horizontal: w * 0.045),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFE3EAF2),
-                  borderRadius: BorderRadius.circular(18),
+                  color: ColorConstants.grayFillColor,
+                  borderRadius: BorderRadius.circular(w * 0.045),
                 ),
-                child: const Center(
-                  child: Text(
+                child: Center(
+                  child: Texts.textNormal(
                     "Previous Day Result",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-                decoration: BoxDecoration(
-                  color: const Color(0xFF4E1A6F),
-                  borderRadius: BorderRadius.circular(18),
-                ),
-                child: const Row(
-                  children: [
-                    Text(
-                      "View more",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    SizedBox(width: 5),
-                    Icon(Icons.chevron_right, size: 16, color: Colors.white),
-                  ],
-                ),
-              )
             ],
           ),
 
-          const SizedBox(height: 16),
+          SizedBox(height: h * 0.02),
 
-          // ---------- TABLE ----------
           Container(
             decoration: BoxDecoration(
-              color: const Color(0xff4E1A6F),
-              borderRadius: BorderRadius.circular(10),
+              color: ColorConstants.primaryColor,
+              borderRadius: BorderRadius.circular(w * 0.025),
             ),
             child: Column(
               children: [
-                // ===== TABLE HEADER =====
                 Container(
-                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  padding: EdgeInsets.symmetric(vertical: h * 0.018),
                   child: Row(
-                    children: const [
+                    children: [
                       Expanded(
                         child: Center(
-                          child: Text("Pair",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold)),
+                          child: Texts.textBold(
+                            "Pair",
+                            size: w * 0.033,
+                            fontWeight: FontWeight.bold,
+                            color: ColorConstants.whiteColor,
+                          ),
                         ),
                       ),
-
-                      // Vertical Divider 1
                       SizedBox(
-                        height: 22,
-                        child: VerticalDivider(color: Colors.white, thickness: 1),
-                      ),
-
-                      Expanded(
-                        child: Center(
-                          child: Text("Tp",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold)),
+                        height: h * 0.03,
+                        child: VerticalDivider(
+                          color: ColorConstants.whiteColor,
+                          thickness: 1,
                         ),
                       ),
-
-                      // Vertical Divider 2
-                      SizedBox(
-                        height: 22,
-                        child: VerticalDivider(color: Colors.white, thickness: 1),
-                      ),
-
                       Expanded(
                         child: Center(
-                          child: Text("SL",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold)),
+                          child: Texts.textBold(
+                            "Tp",
+                            size: w * 0.033,
+                            fontWeight: FontWeight.bold,
+                            color: ColorConstants.whiteColor,
+                          ),
                         ),
                       ),
-
-                      // Vertical Divider 3
                       SizedBox(
-                        height: 22,
-                        child: VerticalDivider(color: Colors.white, thickness: 1),
+                        height: h * 0.03,
+                        child: VerticalDivider(
+                          color: ColorConstants.whiteColor,
+                          thickness: 1,
+                        ),
                       ),
-
                       Expanded(
                         child: Center(
-                          child: Text("Total Wins",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold)),
+                          child: Texts.textBold(
+                            "SL",
+                            size: w * 0.033,
+                            fontWeight: FontWeight.bold,
+                            color: ColorConstants.whiteColor,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: h * 0.03,
+                        child: VerticalDivider(
+                          color: ColorConstants.whiteColor,
+                          thickness: 1,
+                        ),
+                      ),
+                      Expanded(
+                        child: Center(
+                          child: Texts.textBold(
+                            "Total Wins",
+                            size: w * 0.033,
+                            fontWeight: FontWeight.bold,
+                            color: ColorConstants.whiteColor,
+                          ),
                         ),
                       ),
                     ],
                   ),
                 ),
-
-                // --- Horizontal Divider under header ---
-                const Divider(color: Colors.white, height: 1, thickness: 1),
-
-                // ===== TABLE ROW (GOLD) =====
+                Divider(
+                    color: ColorConstants.whiteColor, height: 1, thickness: 1),
                 Container(
-                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  padding: EdgeInsets.symmetric(vertical: h * 0.015),
                   child: Row(
                     children: [
-                      // GOLD BUTTON
                       Expanded(
                         child: Center(
                           child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 18, vertical: 6),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFFF9800),
-                              borderRadius: BorderRadius.circular(10),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: w * 0.045,
+                              vertical: h * 0.008,
                             ),
-                            child: const Text(
+                            decoration: BoxDecoration(
+                              color: ColorConstants.secandoryColor,
+                              borderRadius: BorderRadius.circular(w * 0.025),
+                            ),
+                            child: Texts.textBold(
                               "Gold",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
+                              size: w * 0.030,
+                              fontWeight: FontWeight.bold,
+                              color: ColorConstants.blackColor,
                             ),
                           ),
                         ),
                       ),
-
-                      // NO DIVIDER HERE (requested)
-
-                      // Vertical Divider between TP
-                      const SizedBox(
-                        height: 28,
-
-                      ),
-
-                      // TP
+                      SizedBox(height: h * 0.035),
                       Expanded(
                         child: Center(
                           child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 6),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(6),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: w * 0.040,
+                              vertical: h * 0.008,
                             ),
-                            child: const Text("2",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
+                            decoration: BoxDecoration(
+                              color: ColorConstants.whiteColor,
+                              borderRadius: BorderRadius.circular(w * 0.020),
+                            ),
+                            child: Texts.textBold(
+                              "2",
+                              size: w * 0.030,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
-
-                      // Vertical Divider
-                      const SizedBox(
-                        height: 28,
-
-                      ),
-
-                      // SL
+                      SizedBox(height: h * 0.035),
                       Expanded(
                         child: Center(
                           child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 6),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(6),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: w * 0.040,
+                              vertical: h * 0.008,
                             ),
-                            child: const Text("2",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
+                            decoration: BoxDecoration(
+                              color: ColorConstants.whiteColor,
+                              borderRadius: BorderRadius.circular(w * 0.020),
+                            ),
+                            child: Texts.textBold(
+                              "2",
+                              size: w * 0.030,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
-
-                      // Vertical Divider
-                      const SizedBox(
-                        height: 28,
-
-                      ),
-
-                      // TOTAL WINS
+                      SizedBox(height: h * 0.035),
                       Expanded(
                         child: Center(
                           child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 6),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(6),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: w * 0.040,
+                              vertical: h * 0.008,
                             ),
-                            child: const Text("2",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
+                            decoration: BoxDecoration(
+                              color: ColorConstants.whiteColor,
+                              borderRadius: BorderRadius.circular(w * 0.020),
+                            ),
+                            child: Texts.textBold(
+                              "2",
+                              size: w * 0.030,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),

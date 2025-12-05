@@ -3,10 +3,8 @@ import 'package:trading_app/core/widgets/bottom-nav.dart';
 import 'package:trading_app/view/home-screens/home-screen.dart';
 import 'package:trading_app/view/home-screens/package-screen.dart';
 import 'package:trading_app/view/home-screens/result-screen.dart';
-import 'package:trading_app/view/home-screens/singnals-screen.dart';
+import 'package:trading_app/view/home-screens/signal-screen.dart';
 import 'package:trading_app/view/home-screens/tutorial-screen.dart';
-
-
 
 class MainNavController extends StatefulWidget {
   const MainNavController({super.key});
@@ -15,10 +13,14 @@ class MainNavController extends StatefulWidget {
   State<MainNavController> createState() => _MainNavControllerState();
 }
 
-class _MainNavControllerState extends State<MainNavController> {
-  int index = 0;
+class MainNav {
+  static late _MainNavControllerState controller;
+}
 
-  final List<Widget> screens = const [
+class _MainNavControllerState extends State<MainNavController> {
+  int bottomNavIndex = 0;
+
+  final List<Widget> screens = [
     HomeScreen(),
     SignalScreen(),
     PackageScreen(),
@@ -27,15 +29,29 @@ class _MainNavControllerState extends State<MainNavController> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    MainNav.controller = this; // 👈 store instance here
+  }
+
+  void changeTab(int index) {
+    setState(() {
+      bottomNavIndex = index;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: screens[index],
-
+      body: IndexedStack(
+        index: bottomNavIndex,
+        children: screens,
+      ),
       bottomNavigationBar: AppBottomNav(
-        currentIndex: index,
+        currentIndex: bottomNavIndex,
         onTap: (value) {
           setState(() {
-            index = value;
+            bottomNavIndex = value;
           });
         },
       ),

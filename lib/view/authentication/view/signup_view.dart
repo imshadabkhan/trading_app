@@ -5,8 +5,6 @@ import 'package:trading_app/core/constants/padding_constants.dart';
 import 'package:trading_app/core/utils/extensions.dart';
 import 'package:trading_app/core/widgets/custom_button.dart';
 import 'package:trading_app/view/authentication/view/verification_view.dart';
-
-import '../../../core/constants/assets_constants.dart';
 import '../../../core/constants/color_constants.dart';
 import '../../../core/widgets/entry_field.dart';
 import '../../../core/widgets/text_widgets.dart';
@@ -15,7 +13,7 @@ import '../controller/authentication_controller.dart';
 
 class SignUpView extends StatelessWidget {
   final AuthenticationController authenticationController =
-  Get.put(AuthenticationController());
+      Get.put(AuthenticationController());
 
   final TextEditingController fullName = TextEditingController();
   final TextEditingController email = TextEditingController();
@@ -26,30 +24,38 @@ class SignUpView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Responsive screen dimensions
+    final screenWidth = Get.width;
+    final screenHeight = Get.height;
+
     return GestureDetector(
       onTap: () => context.hideKeyboard(),
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: ColorConstants.primaryColor,
         body: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 160),
+          padding: EdgeInsets.symmetric(
+            horizontal: screenWidth * 0.075,
+            vertical: screenHeight * 0.2,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Widgets.heightSpaceH5,
+
               /// ✅ Sign Up title ABOVE the fields
               Texts.textMedium(
                 "Sign Up",
-                size: 28,
+                size: screenWidth * 0.07,
                 color: ColorConstants.whiteColor,
                 fontWeight: FontWeight.w600,
               ),
 
-              Widgets.heightSpaceH3,
+              SizedBox(height: screenHeight * 0.02), // Widgets.heightSpaceH3
 
-              formSection(),
+              formSection(screenWidth, screenHeight),
 
-              Widgets.heightSpaceH3,
+              SizedBox(height: screenHeight * 0.02), // Widgets.heightSpaceH3
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -57,7 +63,7 @@ class SignUpView extends StatelessWidget {
                   Texts.textBold(
                     "Already have an account?  ",
                     color: ColorConstants.whiteColor,
-                    size: 12,
+                    size: screenWidth * 0.035,
                     fontWeight: FontWeight.w700,
                   ),
                   GestureDetector(
@@ -68,7 +74,7 @@ class SignUpView extends StatelessWidget {
                       "Login",
                       color: ColorConstants.whiteColor,
                       decoration: TextDecoration.underline,
-                      size: 13,
+                      size: screenWidth * 0.036,
                       fontFamily: "PoppinsRegular",
                       fontWeight: FontWeight.w600,
                     ),
@@ -82,36 +88,35 @@ class SignUpView extends StatelessWidget {
     );
   }
 
-  Widget formSection() {
+  Widget formSection(double screenWidth, double screenHeight) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         EntryField(
           controller: fullName,
-          prefixIconWidget:Icon(
-              Icons.person_outline,
+          prefixIconWidget: Icon(
+            Icons.person_outline,
             color: ColorConstants.iconColors,
-            size: 17,
+            size: screenWidth * 0.045,
           ),
           hint: "Full Name",
         ),
         EntryField(
           controller: email,
           prefixIconWidget: Icon(
-              Icons.email_outlined,
+            Icons.email_outlined,
             color: ColorConstants.iconColors,
-            size: 17,
+            size: screenWidth * 0.045,
           ),
           hint: "Email Address",
         ),
-
         Obx(
-              () => EntryField(
+          () => EntryField(
             controller: password,
             prefixIconWidget: Icon(
-                Icons.lock_outline_sharp,
+              Icons.lock_outline_sharp,
               color: ColorConstants.iconColors,
-              size: 17,
+              size: screenWidth * 0.045,
             ),
             hint: "Password",
             obscureText: authenticationController.obscured.value,
@@ -121,13 +126,13 @@ class SignUpView extends StatelessWidget {
             onTrailingTap: authenticationController.toggleObscured,
           ),
         ),
-
         Obx(
-              () => EntryField(
+          () => EntryField(
             controller: confirmPassword,
-            prefixIconWidget: Icon(Icons.lock_outline_sharp,
+            prefixIconWidget: Icon(
+              Icons.lock_outline_sharp,
               color: ColorConstants.iconColors,
-              size: 17,
+              size: screenWidth * 0.045,
             ),
             hint: "Confirm Password",
             obscureText: authenticationController.obscured.value,
@@ -137,15 +142,13 @@ class SignUpView extends StatelessWidget {
             onTrailingTap: authenticationController.toggleObscured,
           ),
         ),
-
-        Widgets.heightSpaceH4,
-
+        SizedBox(height: screenHeight * 0.03), // Widgets.heightSpaceH4
         CustomButton(
           label: "Register",
-          fontSize: 16,
+          fontSize: screenWidth * 0.04,
           textColor: ColorConstants.primaryColor,
           backgroundColor: ColorConstants.secandoryColor,
-          radius: 25,
+          radius: screenWidth * 0.065,
           onTap: () {
             // Call signup first
             authenticationController.signupUser(data: {
@@ -160,7 +163,6 @@ class SignUpView extends StatelessWidget {
             Get.to(() => VerificationView());
           },
         ),
-
       ],
     );
   }

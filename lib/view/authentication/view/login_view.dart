@@ -1,22 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:trading_app/core/routes/app_routes.dart';
 import 'package:trading_app/core/utils/extensions.dart';
 import 'package:trading_app/view/authentication/view/signup_view.dart';
-import 'package:trading_app/view/home-screens/home-screen.dart';
-
+import 'package:trading_app/view/home-screens/bottom-nav-controller.dart';
 import '../../../core/constants/assets_constants.dart';
 import '../../../core/constants/color_constants.dart';
-import '../../../core/constants/padding_constants.dart' show PaddingConstants;
+// import '../../../core/constants/padding_constants.dart' show PaddingConstants;
 import '../../../core/widgets/custom_button.dart';
 import '../../../core/widgets/entry_field.dart';
-
 import '../../../core/widgets/text_widgets.dart';
-import '../../../core/widgets/widgets.dart';
 import '../controller/authentication_controller.dart';
-import 'forgot_password_view.dart';
 
 class LoginView extends StatelessWidget {
   final AuthenticationController authenticationController =
@@ -28,47 +23,53 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Responsive screen dimensions
+    final screenWidth = Get.width;
+    final screenHeight = Get.height;
+
     return GestureDetector(
       onTap: () => context.hideKeyboard(),
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: ColorConstants.primaryColor,
         body: Padding(
-          padding: const EdgeInsets.symmetric( vertical: 137),
+          padding: EdgeInsets.symmetric(vertical: screenHeight * 0.09),
           child: Column(
-            //mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              //Widgets.heightSpaceH05,
               Image.asset(
-                "assets/images/logo.png",
-                width: 120,
-                height: 120,
+                Assets.logo,
+                width: screenWidth * 0.3,
+                height: screenWidth * 0.3,
               ),
-              Widgets.heightSpaceH5,
-              formSection(),
-              Widgets.heightSpaceH3,
+              SizedBox(height: screenHeight * 0.04),
+              formSection(screenWidth, screenHeight),
+              SizedBox(height: screenHeight * 0.03),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Texts.textBold("Don't have an account?  ",
-                      color: Colors.white,
-                      size: 13,
-                      fontWeight: FontWeight.w900),
+                  Texts.textBold(
+                    "Don't have an account?  ",
+                    color: ColorConstants.whiteColor,
+                    size: screenWidth * 0.034,
+                    fontWeight: FontWeight.w900,
+                  ),
                   GestureDetector(
                     onTap: () {
                       Get.to(() => SignUpView());
                     },
-                    child: Texts.textBlock("Signup",
-                        color: ColorConstants.whiteColor,
-                        size: 13,
-                        decoration: TextDecoration.underline,
-                        fontFamily: "PoppinsRegular",
-                        fontWeight: FontWeight.w900),
+                    child: Texts.textBlock(
+                      "Signup",
+                      color: ColorConstants.whiteColor,
+                      size: screenWidth * 0.034,
+                      decoration: TextDecoration.underline,
+                      fontFamily: "PoppinsRegular",
+                      fontWeight: FontWeight.w900,
+                    ),
                   ),
                 ],
               ),
-              Widgets.heightSpaceH2,
+              SizedBox(height: screenHeight * 0.02),
             ],
           ),
         ),
@@ -76,37 +77,36 @@ class LoginView extends StatelessWidget {
     );
   }
 
-  formSection() {
+  formSection(double screenWidth, double screenHeight) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30),
+      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.08),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Texts.textBold("Welcome Back To \n Trading App",
-              color: ColorConstants.whiteColor,
-              size: 20,
-              fontWeight: FontWeight.w600),
-          Widgets.heightSpaceH5,
-
+          Texts.textBold(
+            "Welcome Back To \n Trading App",
+            color: ColorConstants.whiteColor,
+            size: screenWidth * 0.03,
+            fontWeight: FontWeight.w600,
+          ),
+          SizedBox(height: screenHeight * 0.035),
           EntryField(
-
             color: ColorConstants.whiteColor,
             controller: emailController,
             prefixIconWidget: Icon(
               Icons.email_outlined,
-              color: ColorConstants.iconColors, // same as eye icon color
-              size: 17,
+              color: ColorConstants.iconColors,
+              size: screenWidth * 0.043,
             ),
             hint: "Email Address",
           ),
-
           Obx(
             () => EntryField(
               controller: passwordController,
               prefixIconWidget: Icon(
                 Icons.lock_outline_sharp,
                 color: ColorConstants.iconColors,
-                size: 17,
+                size: screenWidth * 0.043,
               ),
               hint: "Password",
               obscureText: authenticationController.obscured.value,
@@ -118,34 +118,28 @@ class LoginView extends StatelessWidget {
               },
             ),
           ),
-          Widgets.heightSpaceH1,
+          SizedBox(height: screenHeight * 0.015),
           GestureDetector(
-            onTap: () {
-              Get.to(() => ForgotPasswordView());
-            },
+            onTap: () => Get.toNamed(RoutesName.forgotPassword),
             child: Align(
               alignment: Alignment.center,
               child: Texts.textBlock(
                 "Forgot Password?",
-                color: Colors.white,
+                color: ColorConstants.whiteColor,
                 decoration: TextDecoration.underline,
-                size: 12,
+                size: screenWidth * 0.033,
                 fontWeight: FontWeight.w700,
               ),
             ),
           ),
-          Widgets.heightSpaceH5,
-         // Widgets.heightSpaceH2,
-          //Widgets.heightSpaceH2,
+          SizedBox(height: screenHeight * 0.035),
           CustomButton(
             label: "Login",
-
             textColor: ColorConstants.primaryColor,
             backgroundColor: ColorConstants.secandoryColor,
-            radius: 25,
-            //borderColor: ColorConstants.grayBorderColor,
+            radius: screenWidth * 0.065,
             onTap: () {
-              Get.to(HomeScreen());
+              Get.to(MainNavController());
             },
           ),
         ],

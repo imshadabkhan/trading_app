@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:trading_app/core/widgets/text_widgets.dart';
-
-
 import '../constants/color_constants.dart';
 
+// ignore: must_be_immutable
 class CustomDropdown extends StatelessWidget {
-  CustomDropdown({
-    super.key,
-    required this.onTap,
-    required this.value,
-    required this.hint,
-    required this.label,
-     this.prefixIcon,
-    this.suffixIcon,
-    this.labelIcon
-  });
-
+  CustomDropdown(
+      {super.key,
+      required this.onTap,
+      required this.value,
+      required this.hint,
+      required this.label,
+      this.prefixIcon,
+      this.suffixIcon,
+      this.labelIcon});
 
   Callback? onTap;
   String? value;
@@ -34,20 +31,19 @@ class CustomDropdown extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Texts.textBlock(fontWeight: FontWeight.w600,
-              label??"",
-            size: 10,
+            Texts.textBlock(
+              fontWeight: FontWeight.w600,
+              label ?? "",
+              size: 10,
             ),
-
-            labelIcon??Container(),
-
+            labelIcon ?? Container(),
           ],
         ),
         const SizedBox(
           height: 7,
         ),
         GestureDetector(
-            onTap:onTap,
+            onTap: onTap,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               alignment: Alignment.centerLeft,
@@ -59,35 +55,42 @@ class CustomDropdown extends StatelessWidget {
               width: 1,
               child: Row(
                 children: [
-                  prefixIcon??Container(),
-                  const SizedBox(width: 10,),
-                  Expanded(
-                    child: Texts.textBlock(fontWeight: FontWeight.w300,size: 10,
-                        value ?? hint!,color:
-                        value == null
-                            ? ColorConstants.greyTextColor
-                            : Colors.black87),
+                  prefixIcon ?? Container(),
+                  const SizedBox(
+                    width: 10,
                   ),
-                  const SizedBox(width: 10,),
-                 suffixIcon??Container(),
+                  Expanded(
+                    child: Texts.textBlock(
+                        fontWeight: FontWeight.w300,
+                        size: 10,
+                        value ?? hint!,
+                        color: value == null
+                            ? ColorConstants.greyTextColor
+                            : ColorConstants.blackColor.withOpacity(.7)),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  suffixIcon ?? Container(),
                 ],
               ),
-            )),const SizedBox(
+            )),
+        const SizedBox(
           height: 15,
         ),
       ],
     );
   }
 }
-class CustomDropdown2 extends StatelessWidget {
-  CustomDropdown2({
-    super.key,
-    required this.onTap,
-    required this.value,
-    required this.hint,
-    required this.label
-  });
 
+// ignore: must_be_immutable
+class CustomDropdown2 extends StatelessWidget {
+  CustomDropdown2(
+      {super.key,
+      required this.onTap,
+      required this.value,
+      required this.hint,
+      required this.label});
 
   Callback? onTap;
   String? value;
@@ -104,18 +107,17 @@ class CustomDropdown2 extends StatelessWidget {
             Text(
               label!,
               style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: Colors.black87,
+                  color: ColorConstants.blackColor.withOpacity(.7),
                   fontSize: 13,
                   fontFamily: "LatoRegular"),
             ),
-
           ],
         ),
         const SizedBox(
           height: 7,
         ),
         GestureDetector(
-            onTap:onTap,
+            onTap: onTap,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               alignment: Alignment.centerLeft,
@@ -127,17 +129,26 @@ class CustomDropdown2 extends StatelessWidget {
               child: Row(
                 children: [
                   Expanded(
-                    child: Texts.textBlock(fontWeight: FontWeight.w300,size: 10,
-                        value ?? hint!,color:
-                        value == null
-                            ? Colors.grey
-                            : Colors.black87),
+                    child: Texts.textBlock(
+                        fontWeight: FontWeight.w300,
+                        size: 10,
+                        value ?? hint!,
+                        color: value == null
+                            ? ColorConstants.grayFillColor
+                            : ColorConstants.blackColor.withOpacity(7)),
                   ),
-                  const SizedBox(width: 10,),
-                  Icon(Icons.keyboard_arrow_down_outlined,color: Colors.black54,size: 18,)
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Icon(
+                    Icons.keyboard_arrow_down_outlined,
+                    color: ColorConstants.blackColor.withOpacity(.5),
+                    size: 18,
+                  )
                 ],
               ),
-            )),const SizedBox(
+            )),
+        const SizedBox(
           height: 10,
         ),
       ],
