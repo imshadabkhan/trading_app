@@ -22,14 +22,6 @@ class ChatHeader extends StatelessWidget implements PreferredSizeWidget {
               vertical: height * 0.02, horizontal: width * 0.05),
           child: Row(
             children: [
-              IconButton(
-                icon: Icon(
-                  Icons.arrow_back_ios_sharp,
-                  size: width * 0.06,
-                  color: ColorConstants.whiteColor,
-                ),
-                onPressed: () => Get.back(),
-              ),
               Container(
                 height: height * 0.04,
                 width: height * 0.04,

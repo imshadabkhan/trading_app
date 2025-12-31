@@ -28,7 +28,7 @@ class CustomTopHeader extends StatelessWidget {
     final height = Get.height;
 
     return SizedBox(
-      height: height * 0.45, // responsive height
+      height: height * 0.35, // responsive height
       child: Stack(
         clipBehavior: Clip.none,
         children: [
@@ -51,8 +51,16 @@ class CustomTopHeader extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(Icons.menu,
-                        color: ColorConstants.whiteColor, size: width * 0.07),
+                    Builder(
+                      builder: (context) => GestureDetector(
+                        onTap: () => Scaffold.of(context).openDrawer(),
+                        child: Icon(
+                          Icons.menu,
+                          color: ColorConstants.whiteColor,
+                          size: width * 0.07,
+                        ),
+                      ),
+                    ),
                     Row(
                       children: [
                         Icon(Icons.notifications,

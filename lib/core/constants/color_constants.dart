@@ -12,6 +12,7 @@ class ColorConstants {
   static var musicianProfileEditButton = const Color(0xff727988);
   static var blackColor = const Color(0xff000000);
   static var redColor = const Color(0xffFE2E52);
+  static var orangeColor = const Color(0xffF6B308);
   static var transparentColor = Colors.transparent;
   static var redColorOpacity =
       const Color(0xffFE2E52).withAlpha((0.1 * 255).toInt());

@@ -19,31 +19,46 @@ class PreviousResult extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Widgets.heightSpaceH5,
-
-          // ---------- HEADER ROW ----------
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                height: h * 0.045,
-                padding: EdgeInsets.symmetric(horizontal: w * 0.045),
-                decoration: BoxDecoration(
-                  color: ColorConstants.grayFillColor,
-                  borderRadius: BorderRadius.circular(w * 0.045),
-                ),
-                child: Center(
-                  child: Texts.textNormal(
-                    "Previous Day Result",
-                    fontWeight: FontWeight.bold,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  width: w * 0.3,
+                  decoration: BoxDecoration(
+                    color: ColorConstants.bottomSheetBack.withOpacity(.5),
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                      child: Texts.textBold("Previous Day Result",
+                          size: w * 0.025,
+                          fontWeight: FontWeight.bold,
+                          color: ColorConstants.primaryColor),
+                    ),
                   ),
                 ),
               ),
+              TextButton(
+                  onPressed: () {},
+                  child: Row(
+                    children: [
+                      Texts.textBold("View more",
+                          size: w * 0.025,
+                          fontWeight: FontWeight.bold,
+                          color: ColorConstants.primaryColor),
+                      Widgets.widthSpaceW05,
+                      Icon(
+                        Icons.arrow_forward_ios,
+                        size: w * 0.03,
+                        color: ColorConstants.primaryColor,
+                      ),
+                    ],
+                  ))
             ],
           ),
-
-          SizedBox(height: h * 0.02),
-
           Container(
             decoration: BoxDecoration(
               color: ColorConstants.primaryColor,

@@ -50,7 +50,6 @@ class _VerificationViewState extends State<VerificationView> {
 
   @override
   Widget build(BuildContext context) {
-    // Responsive screen dimensions
     final screenWidth = Get.width;
     final screenHeight = Get.height;
 

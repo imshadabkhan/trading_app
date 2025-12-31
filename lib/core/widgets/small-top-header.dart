@@ -9,7 +9,7 @@ class SmallTopHeader extends StatelessWidget {
 
   const SmallTopHeader({
     super.key,
-    this.labelHeight = 180,
+    this.labelHeight = 130,
     this.icon = const Icon(Icons.menu, color: Colors.white, size: 28),
     this.iconOnTap,
   });
@@ -26,9 +26,9 @@ class SmallTopHeader extends StatelessWidget {
             width: double.infinity,
             height: 130 * (h / 800),
             padding: EdgeInsets.only(
-              top: 50 * (h / 800),
-              left: 20 * (w / 400),
-              right: 20 * (w / 400),
+              top: h * 0.06,
+              left: w * 0.05,
+              right: w * 0.05,
             ),
             decoration: BoxDecoration(
               color: ColorConstants.primaryColor,
@@ -39,7 +39,20 @@ class SmallTopHeader extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    GestureDetector(onTap: iconOnTap ?? () {}, child: icon),
+                    GestureDetector(
+                      onTap: iconOnTap,
+                      child: icon,
+                    ),
+                    // Builder(
+                    //   builder: (context) => GestureDetector(
+                    //     onTap: () => Scaffold.of(context).openDrawer(),
+                    //     child: Icon(
+                    //       Icons.menu,
+                    //       color: ColorConstants.whiteColor,
+                    //       size: w * 0.07,
+                    //     ),
+                    //   ),
+                    // ),
                     Row(
                       children: [
                         Icon(Icons.notifications,

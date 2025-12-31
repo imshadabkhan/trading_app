@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:trading_app/core/constants/assets_constants.dart';
 import 'package:trading_app/core/widgets/custom_button.dart';
 import 'package:trading_app/view/authentication/controller/subscription-controller.dart';
+import 'package:trading_app/view/home-screens/payment_support_form.dart';
 import '../constants/color_constants.dart';
 import '../widgets/text_widgets.dart';
 
@@ -204,8 +205,7 @@ class Widgets {
       final h = MediaQuery.of(context).size.height;
 
       return Padding(
-        padding:
-            EdgeInsets.only(left: w * 0.03, top: h * 0.012, right: w * 0.25),
+        padding: EdgeInsets.only(top: h * 0.012, right: w * 0.25),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -792,6 +792,7 @@ class BrokerBottomSheet extends StatelessWidget {
                   SizedBox(height: height * 0.02),
                   CustomButton(
                     backgroundColor: ColorConstants.secandoryColor,
+                    onTap: () => Get.to(() => PaymentSupportForm()),
                     label: 'Partner Link',
                     textStyle: TextStyle(
                         fontWeight: FontWeight.w700, fontSize: width * 0.045),

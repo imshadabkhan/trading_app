@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:trading_app/core/widgets/bottom-nav.dart';
+import 'package:trading_app/view/home-screens/chat-screen.dart';
 import 'package:trading_app/view/home-screens/home-screen.dart';
 import 'package:trading_app/view/home-screens/package-screen.dart';
-import 'package:trading_app/view/home-screens/result-screen.dart';
-import 'package:trading_app/view/home-screens/signal-screen.dart';
+import 'package:trading_app/view/home-screens/result_screen.dart';
 import 'package:trading_app/view/home-screens/tutorial-screen.dart';
 
 class MainNavController extends StatefulWidget {
@@ -19,10 +19,11 @@ class MainNav {
 
 class _MainNavControllerState extends State<MainNavController> {
   int bottomNavIndex = 0;
+  bool showBottomNav = true;
 
   final List<Widget> screens = [
     HomeScreen(),
-    SignalScreen(),
+    ChatScreen(),
     PackageScreen(),
     ResultScreen(),
     TutorialScreen(),
@@ -40,6 +41,22 @@ class _MainNavControllerState extends State<MainNavController> {
     });
   }
 
+  void hideBottomNav() {
+    if (showBottomNav) {
+      setState(() {
+        showBottomNav = false;
+      });
+    }
+  }
+
+  void showBottomNavBar() {
+    if (!showBottomNav) {
+      setState(() {
+        showBottomNav = true;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,14 +64,16 @@ class _MainNavControllerState extends State<MainNavController> {
         index: bottomNavIndex,
         children: screens,
       ),
-      bottomNavigationBar: AppBottomNav(
-        currentIndex: bottomNavIndex,
-        onTap: (value) {
-          setState(() {
-            bottomNavIndex = value;
-          });
-        },
-      ),
+      bottomNavigationBar: showBottomNav
+          ? AppBottomNav(
+              currentIndex: bottomNavIndex,
+              onTap: (value) {
+                setState(() {
+                  bottomNavIndex = value;
+                });
+              },
+            )
+          : const SizedBox.shrink(),
     );
   }
 }

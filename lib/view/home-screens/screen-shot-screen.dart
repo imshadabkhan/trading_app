@@ -28,6 +28,7 @@ class _ScreenShotScreenState extends State<ScreenShotScreen> {
                   color: ColorConstants.whiteColor, size: screenWidth * .06),
               iconOnTap: () => Get.back(),
             ),
+            Widgets.heightSpaceH5,
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 0),
               child: Stack(children: [
@@ -191,7 +192,7 @@ class _ScreenShotScreenState extends State<ScreenShotScreen> {
                           "Bitcoin continues to show strong upward momentum as market confidence grows. Analysts expect volatility, but long-term sentiment remains bullish for major investors. Traders are watching key resistance levels closely for the next breakout.",
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontSize: screenWidth * 0.025,
+                              fontSize: screenWidth * 0.030,
                               color: ColorConstants.blackColor),
                         ),
                       ],

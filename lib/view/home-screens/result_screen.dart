@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:trading_app/core/constants/color_constants.dart';
+import 'package:trading_app/core/widgets/drawer.dart';
 import 'package:trading_app/core/widgets/small-top-header.dart';
 import 'package:trading_app/core/widgets/text_widgets.dart';
 import 'package:trading_app/core/widgets/widgets.dart';
+import 'package:trading_app/view/home-screens/bottom-nav-controller.dart';
 
-class SignalScreen extends StatefulWidget {
-  const SignalScreen({super.key});
+class ResultScreen extends StatefulWidget {
+  const ResultScreen({super.key});
 
   @override
-  State<SignalScreen> createState() => _SignalScreenState();
+  State<ResultScreen> createState() => _ResultScreenState();
 }
 
-class _SignalScreenState extends State<SignalScreen>
+class _ResultScreenState extends State<ResultScreen>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
   late ScrollController scrollController;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -37,6 +40,15 @@ class _SignalScreenState extends State<SignalScreen>
     final screenHeight = Get.height;
 
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: const CustomDrawer(),
+      onDrawerChanged: (isOpened) {
+        if (isOpened) {
+          MainNav.controller.hideBottomNav();
+        } else {
+          MainNav.controller.showBottomNavBar();
+        }
+      },
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(screenHeight * 0.35),
         child: AppBar(
@@ -62,7 +74,15 @@ class _SignalScreenState extends State<SignalScreen>
           ),
           flexibleSpace: Column(
             children: [
-              const SmallTopHeader(
+              SmallTopHeader(
+                icon: Icon(
+                  Icons.menu,
+                  color: ColorConstants.whiteColor,
+                  size: screenWidth * 0.07,
+                ),
+                iconOnTap: () {
+                  _scaffoldKey.currentState?.openDrawer();
+                },
                 labelHeight: 120,
               ),
               Padding(
@@ -173,7 +193,7 @@ class _SignalScreenState extends State<SignalScreen>
     ];
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Column(
         children: [
           Container(

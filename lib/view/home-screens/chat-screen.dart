@@ -18,88 +18,86 @@ class ChatScreen extends StatelessWidget {
     final double textLarge = w * 0.045;
 
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const ChatHeader(),
-            Widgets.buildMessageBubble(
-              content: Text(
-                'we will bring Offer',
-                style: TextStyle(
-                  fontSize: textNormal,
-                  color: ColorConstants.blackColor.withOpacity(.7),
-                ),
-              ),
-              datecontent: Text(
-                '11/25/2025',
-                style: TextStyle(
-                  fontSize: textSmall,
-                  color: ColorConstants.blackColor.withOpacity(.7),
-                ),
-              ),
-              likes: 1,
-              views: 90,
-              time: '10:56 AM',
-            ),
-            Widgets.buildMessageBubble(
-              content: ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(radius),
-                  bottomLeft: Radius.circular(radius),
-                  bottomRight: Radius.circular(radius),
-                ),
-                child: Image.asset(
-                  Assets.chatScreen,
-                  height: h * 0.25,
-                  width: w * 0.6,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              datecontent: Text(
-                '11/25/2025',
-                style: TextStyle(
-                  fontSize: textSmall,
-                  color: ColorConstants.blackColor.withOpacity(.7),
-                ),
-              ),
-              likes: 1,
-              views: 90,
-              time: '10:56 AM',
-            ),
-            SizedBox(height: h * 0.02),
-            Padding(
-              padding: EdgeInsets.only(left: w * 0.01),
+      body: Column(
+        children: [
+          const ChatHeader(),
+          Expanded(
+            child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'MK Ali Trader',
-                    style: TextStyle(
-                      fontSize: textLarge,
-                      fontWeight: FontWeight.bold,
-                      color: ColorConstants.blackColor,
+                  Widgets.buildMessageBubble(
+                    content: Text(
+                      'we will bring Offer',
+                      style: TextStyle(
+                        fontSize: textNormal,
+                        color: ColorConstants.blackColor.withOpacity(.7),
+                      ),
                     ),
-                  ),
-                  SizedBox(height: h * 0.005),
-                  Text(
-                    'Vip Trade',
-                    style: TextStyle(
-                      fontSize: textNormal,
-                      color: ColorConstants.secandoryColor,
+                    datecontent: Text(
+                      '11/25/2025',
+                      style: TextStyle(
+                        fontSize: textSmall,
+                        color: ColorConstants.blackColor.withOpacity(.7),
+                      ),
                     ),
-                  ),
-                  MessageMetadata(
-                    likes: 14,
-                    views: 10,
+                    likes: 1,
+                    views: 90,
                     time: '10:56 AM',
                   ),
+                  Widgets.buildMessageBubble(
+                    content: ClipRRect(
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(radius),
+                      ),
+                      child: Image.asset(
+                        Assets.chatScreen,
+                        height: h * 0.25,
+                        width: w * 0.6,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    datecontent: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        '11/25/2025',
+                        style: TextStyle(
+                          fontSize: textSmall,
+                          color: ColorConstants.blackColor.withOpacity(.7),
+                        ),
+                      ),
+                    ),
+                    likes: 1,
+                    views: 90,
+                    time: '10:56 AM',
+                  ),
+                  Widgets.heightSpaceH05,
+                  Widgets.buildMessageBubble(
+                    content: Text(
+                      'MK Ali Trader',
+                      style: TextStyle(
+                        fontSize: textLarge,
+                        color: ColorConstants.blackColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    datecontent: Text(
+                      'Vip Trade',
+                      style: TextStyle(
+                        fontSize: textSmall,
+                        color: ColorConstants.secandoryColor,
+                      ),
+                    ),
+                    likes: 14,
+                    views: 90,
+                    time: '10:56 AM',
+                  ),
+                  Widgets.heightSpaceH05,
                 ],
               ),
             ),
-            SizedBox(height: h * 0.06),
-          ],
-        ),
+          )
+        ],
       ),
     );
   }

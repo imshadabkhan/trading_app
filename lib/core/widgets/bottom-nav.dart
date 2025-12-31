@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:trading_app/core/constants/assets_constants.dart';
 import 'package:trading_app/core/constants/color_constants.dart';
@@ -41,11 +42,12 @@ class AppBottomNav extends StatelessWidget {
           selectedColor: ColorConstants.secandoryColor,
           unSelectedColor: ColorConstants.whiteColor,
           items: [
-            buildNavItem(context, Assets.home2, "Home", 0, width, height),
-            buildNavItem(context, Assets.signals1, "Signals", 1, width, height),
+            buildNavItem(context, Assets.home, "Home", 0, width, height),
+            buildNavItem(context, Assets.signal, "Signals", 1, width, height),
             buildNavItem(context, Assets.package, "Package", 2, width, height),
-            buildNavItem(context, Assets.news, "Result", 3, width, height),
-            buildNavItem(context, Assets.wallet, "Tutorial", 4, width, height),
+            buildNavItem(context, Assets.result, "Result", 3, width, height),
+            buildNavItem(
+                context, Assets.tutorial, "Tutorial", 4, width, height),
           ],
         ),
       ),
@@ -59,9 +61,9 @@ class AppBottomNav extends StatelessWidget {
       icon: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(
+          SvgPicture.asset(
             asset,
-            height: height * 0.025,
+            height: height * 0.020,
             color: isSelected
                 ? ColorConstants.secandoryColor
                 : ColorConstants.whiteColor,
@@ -72,7 +74,7 @@ class AppBottomNav extends StatelessWidget {
             color: isSelected
                 ? ColorConstants.secandoryColor
                 : ColorConstants.whiteColor,
-            size: width * 0.014,
+            size: width * 0.016,
           ),
         ],
       ),

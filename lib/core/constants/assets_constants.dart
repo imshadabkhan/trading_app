@@ -23,12 +23,26 @@ class Assets {
   static String images5 = "$images/images (5).jpg";
   static String logo = "$images/logo.png";
   static String news = "$images/news.png";
-  static String package = "$images/package.png";
-  static String signals1 = "$images/Signals (1).png";
+  // static String package = "$images/package.png";
+  // static String signals1 = "$images/Signals (1).png";
   static String tutorial1 = "$images/tutorial-1.png";
   static String tutorial2 = "$images/tutorial-2.png";
   static String tutorialMain = "$images/tutorial-main.png";
   static String wallet = "$images/wallet.png";
   static String youtube = "$images/youtube.png";
   static String youtubeShadow = "$images/youtube-shadow.png";
+
+  static String home = "$icons/bottom_home.svg";
+  static String signal = "$icons/bottom_signals.svg";
+  static String package = "$icons/bottom_package.svg";
+  static String result = "$icons/bottom_result.svg";
+  static String tutorial = "$icons/bottom_tutorial.svg";
+  static String edit = "$icons/edit.svg";
+  static String about = "$icons/About.svg";
+  static String fandQ = "$icons/F&Q.svg";
+  static String logout = "$icons/Logout.svg";
+  static String terms = "$icons/terms.svg";
+  static String f = "$icons/facebook.svg";
+  static String t = "$icons/twitter.svg";
+  static String l = "$icons/linkedin.svg";
 }
